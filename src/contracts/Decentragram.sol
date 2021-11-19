@@ -30,7 +30,7 @@ contract Decentragram {
   );
 
 
-  event ImageCreated(
+  event TipImage(
     uint id,
     string hash,
     string description,
@@ -61,13 +61,13 @@ contract Decentragram {
     //Fetch author 
     address payable _author = _image.author;
     //send money to author 
-    payable(_author).transfer(msg.value); //msg.value is the amount of crypto that is sent in 
+    _author.transfer(msg.value); //msg.value is the amount of crypto that is sent in 
     //Increment the tip amount 
     _image.tipAmount = _image.tipAmount + msg.value; 
     //update the image in the list 
     images[_id] = _image; 
     //Trigger Event 
-    emit ImageCreated(_id, _image.hash, _image.description, _image.tipAmount, _author);
+    emit TipImage(_id, _image.hash, _image.description, _image.tipAmount, _author);
   }
  
 }
